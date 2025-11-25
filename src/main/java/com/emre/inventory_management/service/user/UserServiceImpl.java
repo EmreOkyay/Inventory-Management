@@ -1,5 +1,9 @@
-package com.emre.inventory_management.user;
+package com.emre.inventory_management.service.user;
 
+import com.emre.inventory_management.dto.UserRequest;
+import com.emre.inventory_management.event.UserEventProducer;
+import com.emre.inventory_management.model.User;
+import com.emre.inventory_management.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,10 +14,12 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService{
 
     private final UserRepository userRepository;
+    private final UserEventProducer producer;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, UserEventProducer producer) {
         this.userRepository = userRepository;
+        this.producer = producer;
     }
 
     public User createUser(UserRequest request) {
@@ -21,6 +27,8 @@ public class UserServiceImpl implements UserService{
         user.setFirstName(request.getFirstName());
         user.setLastName(request.getLastName());
         user.setEmail(request.getEmail());
+
+        producer.sendUserEvent("user_created:" + user.getFirstName());
 
         return userRepository.save(user);
     }
@@ -30,7 +38,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public Optional<User> findById(Long id) {
+    public Optional<User> getUserById(Long id) {
         return userRepository.findById(id);
     }
 
@@ -38,4 +46,10 @@ public class UserServiceImpl implements UserService{
     public Optional<User> findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
+
+    public void deleteById(Long id) {
+        userRepository.deleteById(id);
+    }
+
+    // TODO: Add exception handling
 }
