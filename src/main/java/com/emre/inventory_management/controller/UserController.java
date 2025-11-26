@@ -24,27 +24,18 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public ResponseEntity<List<User>> getAllUsers() {
-        List<User> users = userServiceImpl.getAllUsers();
+    public ResponseEntity<List<UserDTO>> getAllUsers() {
+        List<UserDTO> users = userServiceImpl.getAllUsers();
         return ResponseEntity.ok(users);
     }
 
     @GetMapping("/id/{id}")
     public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
-        return userServiceImpl.getUserById(id)
-                .map(user -> {
-                    UserDTO userDTO = new UserDTO();
-                    userDTO.setId(user.getId());
-                    userDTO.setFirstName(user.getFirstName());
-                    userDTO.setLastName(user.getLastName());
-                    userDTO.setEmail(user.getEmail());
-                    return ResponseEntity.ok(userDTO);
-                })
-                .orElse(ResponseEntity.notFound().build());
+        return userServiceImpl.getUserById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/email/{email}")
-    public ResponseEntity<User> getUserByEmail(@PathVariable String email) {
+    public ResponseEntity<UserDTO> getUserByEmail(@PathVariable String email) {
         return userServiceImpl.findByEmail(email).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 

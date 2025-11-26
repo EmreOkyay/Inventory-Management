@@ -1,5 +1,6 @@
 package com.emre.inventory_management.service.user;
 
+import com.emre.inventory_management.dto.UserDTO;
 import com.emre.inventory_management.dto.UserRequest;
 import com.emre.inventory_management.event.UserEventProducer;
 import com.emre.inventory_management.model.User;
@@ -33,18 +34,42 @@ public class UserServiceImpl implements UserService{
         return userRepository.save(user);
     }
 
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public List<UserDTO> getAllUsers() {
+        return userRepository.findAll().stream().map(users -> {
+            UserDTO userDto = new UserDTO();
+            userDto.setId(users.getId());
+            userDto.setFirstName(users.getFirstName());
+            userDto.setLastName(users.getLastName());
+            userDto.setEmail(users.getEmail());
+
+            return userDto;
+        }).toList();
     }
 
     @Override
-    public Optional<User> getUserById(Long id) {
-        return userRepository.findById(id);
+    public Optional<UserDTO> getUserById(Long id) {
+        return userRepository.findById(id).map(user -> {
+            UserDTO userDto = new UserDTO();
+            userDto.setId(user.getId());
+            userDto.setFirstName(user.getFirstName());
+            userDto.setLastName(user.getLastName());
+            userDto.setEmail(user.getEmail());
+
+            return userDto;
+        });
     }
 
     @Override
-    public Optional<User> findByEmail(String email) {
-        return userRepository.findByEmail(email);
+    public Optional<UserDTO> findByEmail(String email) {
+        return userRepository.findByEmail(email).map(user -> {
+            UserDTO userDto = new UserDTO();
+            userDto.setId(user.getId());
+            userDto.setFirstName(user.getFirstName());
+            userDto.setLastName(user.getLastName());
+            userDto.setEmail(user.getEmail());
+
+            return userDto;
+        });
     }
 
     public void deleteById(Long id) {
