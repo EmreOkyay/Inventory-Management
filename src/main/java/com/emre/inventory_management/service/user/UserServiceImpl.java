@@ -23,15 +23,29 @@ public class UserServiceImpl implements UserService{
         this.producer = producer;
     }
 
-    public User createUser(UserRequest request) {
+    public UserDTO createUser(UserRequest request) {
+
+        if (findByEmail(request.getEmail()).isPresent())
+            throw new IllegalStateException("User already exists");
+
         User user = new User();
         user.setFirstName(request.getFirstName());
         user.setLastName(request.getLastName());
         user.setEmail(request.getEmail());
 
-        producer.sendUserEvent("user_created:" + user.getFirstName());
+        userRepository.save(user);
 
-        return userRepository.save(user);
+        User savedUser = userRepository.save(user);
+
+        producer.sendUserEvent("user_created:" + savedUser.getFirstName());
+
+        UserDTO userDto = new UserDTO();
+        userDto.setId(savedUser.getId());
+        userDto.setFirstName(savedUser.getFirstName());
+        userDto.setLastName(savedUser.getLastName());
+        userDto.setEmail(savedUser.getEmail());
+
+        return userDto;
     }
 
     public List<UserDTO> getAllUsers() {

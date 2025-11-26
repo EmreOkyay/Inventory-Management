@@ -19,7 +19,7 @@ public class UserController {
     }
 
     @PostMapping("/add")
-    public User addUser(@RequestBody UserRequest request) {
+    public UserDTO addUser(@RequestBody UserRequest request) {
         return userServiceImpl.createUser(request);
     }
 
