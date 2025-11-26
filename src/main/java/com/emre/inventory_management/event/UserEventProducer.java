@@ -14,7 +14,7 @@ public class UserEventProducer {
     }
 
     public void sendUserEvent(String event) {
-        kafkaTemplate.send("demo", event);
+        kafkaTemplate.send("user", event);
     }
 }
 

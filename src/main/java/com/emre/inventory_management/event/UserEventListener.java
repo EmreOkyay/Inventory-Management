@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserEventListener {
-    @KafkaListener(topics = "demo", groupId = "user-service-group")
+    @KafkaListener(topics = "user", groupId = "user-service-group")
     public void listen(String message) {
         System.out.println("Received user event: " + message);
     }
