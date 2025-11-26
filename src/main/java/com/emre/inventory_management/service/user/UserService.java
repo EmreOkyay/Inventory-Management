@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface UserService {
     Optional<UserDTO> getUserById(Long id);
-    Optional<UserDTO> findByEmail(String email);
+    Optional<UserDTO> getUserByEmail(String email);
 }

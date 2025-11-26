@@ -25,15 +25,13 @@ public class UserServiceImpl implements UserService{
 
     public UserDTO createUser(UserRequest request) {
 
-        if (findByEmail(request.getEmail()).isPresent())
+        if (getUserByEmail(request.getEmail()).isPresent())
             throw new IllegalStateException("User already exists");
 
         User user = new User();
         user.setFirstName(request.getFirstName());
         user.setLastName(request.getLastName());
         user.setEmail(request.getEmail());
-
-        userRepository.save(user);
 
         User savedUser = userRepository.save(user);
 
@@ -74,8 +72,8 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public Optional<UserDTO> findByEmail(String email) {
-        return userRepository.findByEmail(email).map(user -> {
+    public Optional<UserDTO> getUserByEmail(String email) {
+        return userRepository.getUserByEmail(email).map(user -> {
             UserDTO userDto = new UserDTO();
             userDto.setId(user.getId());
             userDto.setFirstName(user.getFirstName());
@@ -89,6 +87,4 @@ public class UserServiceImpl implements UserService{
     public void deleteById(Long id) {
         userRepository.deleteById(id);
     }
-
-    // TODO: Add exception handling
 }

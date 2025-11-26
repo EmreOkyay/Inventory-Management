@@ -1,7 +1,6 @@
 package com.emre.inventory_management.controller;
 
 import com.emre.inventory_management.dto.UserDTO;
-import com.emre.inventory_management.model.User;
 import com.emre.inventory_management.dto.UserRequest;
 import com.emre.inventory_management.service.user.UserServiceImpl;
 import org.springframework.http.ResponseEntity;
@@ -36,13 +35,11 @@ public class UserController {
 
     @GetMapping("/email/{email}")
     public ResponseEntity<UserDTO> getUserByEmail(@PathVariable String email) {
-        return userServiceImpl.findByEmail(email).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+        return userServiceImpl.getUserByEmail(email).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
     public void deleteUserById(@PathVariable Long id) {
         userServiceImpl.deleteById(id);
     }
-
-    // TODO: Fix: Same user can be added
 }
