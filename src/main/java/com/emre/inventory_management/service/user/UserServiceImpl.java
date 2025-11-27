@@ -47,44 +47,30 @@ public class UserServiceImpl implements UserService{
     }
 
     public List<UserDTO> getAllUsers() {
-        return userRepository.findAll().stream().map(users -> {
-            UserDTO userDto = new UserDTO();
-            userDto.setId(users.getId());
-            userDto.setFirstName(users.getFirstName());
-            userDto.setLastName(users.getLastName());
-            userDto.setEmail(users.getEmail());
-
-            return userDto;
-        }).toList();
+        return userRepository.findAll().stream().map(this::convertToDTO).toList();
     }
 
     @Override
     public Optional<UserDTO> getUserById(Long id) {
-        return userRepository.findById(id).map(user -> {
-            UserDTO userDto = new UserDTO();
-            userDto.setId(user.getId());
-            userDto.setFirstName(user.getFirstName());
-            userDto.setLastName(user.getLastName());
-            userDto.setEmail(user.getEmail());
-
-            return userDto;
-        });
+        return userRepository.findById(id).map(this::convertToDTO);
     }
 
     @Override
     public Optional<UserDTO> getUserByEmail(String email) {
-        return userRepository.getUserByEmail(email).map(user -> {
-            UserDTO userDto = new UserDTO();
-            userDto.setId(user.getId());
-            userDto.setFirstName(user.getFirstName());
-            userDto.setLastName(user.getLastName());
-            userDto.setEmail(user.getEmail());
-
-            return userDto;
-        });
+        return userRepository.getUserByEmail(email).map(this::convertToDTO);
     }
 
     public void deleteById(Long id) {
         userRepository.deleteById(id);
+    }
+
+    public UserDTO convertToDTO(User user) {
+        UserDTO userDto = new UserDTO();
+        userDto.setId(user.getId());
+        userDto.setFirstName(user.getFirstName());
+        userDto.setLastName(user.getLastName());
+        userDto.setEmail(user.getEmail());
+
+        return userDto;
     }
 }
