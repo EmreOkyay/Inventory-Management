@@ -1,8 +1,9 @@
 package com.emre.inventory_management.service.user;
 
 import com.emre.inventory_management.dto.UserDTO;
-import com.emre.inventory_management.dto.UserRequest;
+import com.emre.inventory_management.dto.request.UserRequest;
 import com.emre.inventory_management.event.UserEventProducer;
+import com.emre.inventory_management.mapper.UserMapper;
 import com.emre.inventory_management.model.User;
 import com.emre.inventory_management.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +17,13 @@ public class UserServiceImpl implements UserService{
 
     private final UserRepository userRepository;
     private final UserEventProducer producer;
+    private final UserMapper userMapper;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, UserEventProducer producer) {
+    public UserServiceImpl(UserRepository userRepository, UserEventProducer producer, UserMapper userMapper) {
         this.userRepository = userRepository;
         this.producer = producer;
+        this.userMapper = userMapper;
     }
 
     public UserDTO createUser(UserRequest request) {
@@ -47,30 +50,20 @@ public class UserServiceImpl implements UserService{
     }
 
     public List<UserDTO> getAllUsers() {
-        return userRepository.findAll().stream().map(this::convertToDTO).toList();
+        return userRepository.findAll().stream().map(userMapper::toDTO).toList();
     }
 
     @Override
     public Optional<UserDTO> getUserById(Long id) {
-        return userRepository.findById(id).map(this::convertToDTO);
+        return userRepository.findById(id).map(userMapper::toDTO);
     }
 
     @Override
     public Optional<UserDTO> getUserByEmail(String email) {
-        return userRepository.getUserByEmail(email).map(this::convertToDTO);
+        return userRepository.getUserByEmail(email).map(userMapper::toDTO);
     }
 
     public void deleteById(Long id) {
         userRepository.deleteById(id);
-    }
-
-    public UserDTO convertToDTO(User user) {
-        UserDTO userDto = new UserDTO();
-        userDto.setId(user.getId());
-        userDto.setFirstName(user.getFirstName());
-        userDto.setLastName(user.getLastName());
-        userDto.setEmail(user.getEmail());
-
-        return userDto;
     }
 }

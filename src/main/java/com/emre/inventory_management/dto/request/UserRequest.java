@@ -1,4 +1,4 @@
-package com.emre.inventory_management.dto;
+package com.emre.inventory_management.dto.request;
 
 import lombok.Getter;
 import lombok.Setter;

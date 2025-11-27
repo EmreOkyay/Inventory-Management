@@ -1,14 +1,13 @@
 package com.emre.inventory_management.controller;
 
 import com.emre.inventory_management.dto.ProductDTO;
-import com.emre.inventory_management.dto.ProductRequest;
+import com.emre.inventory_management.dto.request.ProductRequest;
 import com.emre.inventory_management.service.product.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/product")

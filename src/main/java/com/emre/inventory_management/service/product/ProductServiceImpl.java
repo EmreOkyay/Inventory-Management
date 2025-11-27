@@ -1,7 +1,8 @@
 package com.emre.inventory_management.service.product;
 
 import com.emre.inventory_management.dto.ProductDTO;
-import com.emre.inventory_management.dto.ProductRequest;
+import com.emre.inventory_management.dto.request.ProductRequest;
+import com.emre.inventory_management.mapper.ProductMapper;
 import com.emre.inventory_management.model.Product;
 import com.emre.inventory_management.repository.ProductRepository;
 import org.springframework.stereotype.Service;
@@ -13,9 +14,11 @@ import java.util.Optional;
 public class ProductServiceImpl implements ProductService{
 
     private final ProductRepository productRepository;
+    private final ProductMapper productMapper;
 
-    public ProductServiceImpl(ProductRepository productRepository) {
+    public ProductServiceImpl(ProductRepository productRepository, ProductMapper productMapper) {
         this.productRepository = productRepository;
+        this.productMapper = productMapper;
     }
 
     public ProductDTO createProduct(ProductRequest request) {
@@ -47,38 +50,26 @@ public class ProductServiceImpl implements ProductService{
     }
 
     public List<ProductDTO> getAllProducts() {
-        return productRepository.findAll().stream().map(this::convertToDTO).toList();
+        return productRepository.findAll().stream().map(productMapper::toDTO).toList();
     }
 
     @Override
     public Optional<ProductDTO> getProductById(Long id) {
-        return productRepository.findById(id).map(this::convertToDTO);
+        return productRepository.findById(id).map(productMapper::toDTO);
     }
 
     @Override
     public Optional<ProductDTO> getProductByName(String name) {
-        return productRepository.getProductByName(name).map(this::convertToDTO);
+        return productRepository.getProductByName(name).map(productMapper::toDTO);
     }
 
     @Override
     public List<ProductDTO> getProductsByCategory(String category) {
-        return productRepository.getProductsByCategory(category).stream().map(this::convertToDTO).toList();
+        return productRepository.getProductsByCategory(category).stream().map(productMapper::toDTO).toList();
     }
 
     @Override
     public List<ProductDTO> getProductsWithAvailableStock() {
-        return productRepository.getProductsWithAvailableStock().stream().map(this::convertToDTO).toList();
-    }
-
-    private ProductDTO convertToDTO(Product product) {
-        ProductDTO productDto = new ProductDTO();
-        productDto.setId(product.getId());
-        productDto.setName(product.getName());
-        productDto.setDescription(product.getDescription());
-        productDto.setPrice(product.getPrice());
-        productDto.setCategory(product.getCategory());
-        productDto.setStock(product.getStock());
-        productDto.setIsAvailable(product.getIsAvailable());
-        return productDto;
+        return productRepository.getProductsWithAvailableStock().stream().map(productMapper::toDTO).toList();
     }
 }

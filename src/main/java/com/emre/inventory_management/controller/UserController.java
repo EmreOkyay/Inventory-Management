@@ -1,7 +1,7 @@
 package com.emre.inventory_management.controller;
 
 import com.emre.inventory_management.dto.UserDTO;
-import com.emre.inventory_management.dto.UserRequest;
+import com.emre.inventory_management.dto.request.UserRequest;
 import com.emre.inventory_management.service.user.UserServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
