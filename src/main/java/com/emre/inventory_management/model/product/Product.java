@@ -1,4 +1,4 @@
-package com.emre.inventory_management.model;
+package com.emre.inventory_management.model.product;
 
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;

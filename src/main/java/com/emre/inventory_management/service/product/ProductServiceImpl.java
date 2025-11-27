@@ -3,7 +3,7 @@ package com.emre.inventory_management.service.product;
 import com.emre.inventory_management.dto.ProductDTO;
 import com.emre.inventory_management.dto.request.ProductRequest;
 import com.emre.inventory_management.mapper.ProductMapper;
-import com.emre.inventory_management.model.Product;
+import com.emre.inventory_management.model.product.Product;
 import com.emre.inventory_management.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
 package com.emre.inventory_management.repository;
 
-import com.emre.inventory_management.model.Product;
+import com.emre.inventory_management.model.product.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

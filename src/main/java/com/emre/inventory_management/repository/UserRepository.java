@@ -1,6 +1,6 @@
 package com.emre.inventory_management.repository;
 
-import com.emre.inventory_management.model.User;
+import com.emre.inventory_management.model.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

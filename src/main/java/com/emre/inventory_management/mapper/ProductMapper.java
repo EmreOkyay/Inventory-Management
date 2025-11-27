@@ -1,7 +1,7 @@
 package com.emre.inventory_management.mapper;
 
 import com.emre.inventory_management.dto.ProductDTO;
-import com.emre.inventory_management.model.Product;
+import com.emre.inventory_management.model.product.Product;
 import org.springframework.stereotype.Component;
 
 @Component

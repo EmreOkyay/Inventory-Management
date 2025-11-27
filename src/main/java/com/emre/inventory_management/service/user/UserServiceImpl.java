@@ -4,7 +4,7 @@ import com.emre.inventory_management.dto.UserDTO;
 import com.emre.inventory_management.dto.request.UserRequest;
 import com.emre.inventory_management.event.UserEventProducer;
 import com.emre.inventory_management.mapper.UserMapper;
-import com.emre.inventory_management.model.User;
+import com.emre.inventory_management.model.user.User;
 import com.emre.inventory_management.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

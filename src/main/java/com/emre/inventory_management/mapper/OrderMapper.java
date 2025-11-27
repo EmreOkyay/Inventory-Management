@@ -1,7 +1,7 @@
 package com.emre.inventory_management.mapper;
 
 import com.emre.inventory_management.dto.OrderDTO;
-import com.emre.inventory_management.model.Order;
+import com.emre.inventory_management.model.order.Order;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
