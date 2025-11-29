@@ -37,16 +37,9 @@ public class UserServiceImpl implements UserService{
         user.setEmail(request.getEmail());
 
         User savedUser = userRepository.save(user);
+        producer.sendUserMailEvent(user);
 
-        producer.sendUserEvent("user_created:" + savedUser.getFirstName());
-
-        UserDTO userDto = new UserDTO();
-        userDto.setId(savedUser.getId());
-        userDto.setFirstName(savedUser.getFirstName());
-        userDto.setLastName(savedUser.getLastName());
-        userDto.setEmail(savedUser.getEmail());
-
-        return userDto;
+        return returnUserDTO(savedUser);
     }
 
     public List<UserDTO> getAllUsers() {
@@ -65,5 +58,15 @@ public class UserServiceImpl implements UserService{
 
     public void deleteById(Long id) {
         userRepository.deleteById(id);
+    }
+
+    public UserDTO returnUserDTO(User savedUser) {
+        UserDTO userDto = new UserDTO();
+        userDto.setId(savedUser.getId());
+        userDto.setFirstName(savedUser.getFirstName());
+        userDto.setLastName(savedUser.getLastName());
+        userDto.setEmail(savedUser.getEmail());
+
+        return userDto;
     }
 }
