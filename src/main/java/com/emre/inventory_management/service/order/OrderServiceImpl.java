@@ -69,8 +69,7 @@ public class OrderServiceImpl implements OrderService{
 
         order.setTotalAmount(totalAmount);
         orderRepository.save(order);
-
-        orderEventProducer.sendOrderEvent(order);
+        sendOrderEvent(order);
     }
 
     @Override
@@ -81,6 +80,11 @@ public class OrderServiceImpl implements OrderService{
     @Override
     public OrderDTO getOrderById(Long orderId) {
         return orderRepository.findById(orderId).map(orderMapper::toDTO).orElseThrow(() -> new IllegalArgumentException("Order not found"));
+    }
+
+    public void sendOrderEvent(Order order) {
+        orderEventProducer.sendOrderEvent(order);
+        orderEventProducer.sendOrderMailEvent(order);
     }
 }
 
