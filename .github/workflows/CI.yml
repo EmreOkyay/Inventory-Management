@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       kafka:
-        image: confluentinc/cp-kafka:7.6.1
+        image: apache/kafka
         ports:
           - 9092:9092
         env:
