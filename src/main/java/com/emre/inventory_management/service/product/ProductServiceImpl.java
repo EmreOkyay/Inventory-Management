@@ -34,9 +34,6 @@ public class ProductServiceImpl implements ProductService{
 
         Product savedProduct = productRepository.save(product);
 
-        // TODO: Kafka integration for emailing the dealer(user) maybe
-        // producer.sendUserEvent("product_created:" + savedProduct.getName());
-
         ProductDTO productDTO = new ProductDTO();
 
         productDTO.setName(savedProduct.getName());
