@@ -37,8 +37,7 @@ public class OrderEventListener {
             Order order = objectMapper.readValue(orderJson, Order.class);
 
             order.getItems().forEach(item -> {
-                Product product = productRepository.findById(item.getProduct().getId())
-                        .orElseThrow(() -> new RuntimeException("Product not found with id " + item.getProduct().getId()));
+                Product product = productRepository.findById(item.getProduct().getId()).orElseThrow(() -> new RuntimeException("Product not found with id " + item.getProduct().getId()));
 
                 long newStock = product.getStock() - item.getQuantity();
                 if (newStock < 0) {

@@ -19,10 +19,7 @@ public class OrderMapper {
         dto.setStatus(order.getStatus().toString());
         dto.setCreatedAt(order.getCreatedAt());
         dto.setTotalAmount(order.getTotalAmount());
-        dto.setItems(order.getItems()
-                .stream()
-                .map(orderItemMapper::toDTO)
-                .toList());
+        dto.setItems(order.getItems().stream().map(orderItemMapper::toDTO).toList());
         return dto;
     }
 }
