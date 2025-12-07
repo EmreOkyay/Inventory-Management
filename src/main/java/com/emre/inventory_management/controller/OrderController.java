@@ -37,4 +37,6 @@ public class OrderController {
         orderServiceImpl.createOrder(user);
         return ResponseEntity.ok("Order successfully created");
     }
+
+    // New IDE test comment
 }
