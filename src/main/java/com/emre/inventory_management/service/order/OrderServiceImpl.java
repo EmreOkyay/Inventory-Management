@@ -87,5 +87,3 @@ public class OrderServiceImpl implements OrderService{
         orderEventProducer.sendOrderMailEvent(order);
     }
 }
-
-

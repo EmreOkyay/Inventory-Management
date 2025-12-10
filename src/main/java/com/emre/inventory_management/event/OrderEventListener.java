@@ -1,7 +1,6 @@
 package com.emre.inventory_management.event;
 
 import com.emre.inventory_management.model.order.Order;
-import com.emre.inventory_management.model.order.OrderItem;
 import com.emre.inventory_management.model.product.Product;
 import com.emre.inventory_management.repository.ProductRepository;
 import com.emre.inventory_management.service.email.EmailServiceImpl;
@@ -11,8 +10,6 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tools.jackson.databind.ObjectMapper;
-
-import java.util.List;
 
 @Service
 public class OrderEventListener {
