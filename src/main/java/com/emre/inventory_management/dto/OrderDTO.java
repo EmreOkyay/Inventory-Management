@@ -17,4 +17,3 @@ public class OrderDTO {
     private BigDecimal totalAmount;
     private List<OrderItemDTO> items;
 }
-

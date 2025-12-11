@@ -34,4 +34,3 @@ public class Product {
     private Long stock;
     private Boolean isAvailable = true;
 }
-
