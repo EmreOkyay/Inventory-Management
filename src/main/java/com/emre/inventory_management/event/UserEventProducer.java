@@ -32,4 +32,6 @@ public class UserEventProducer {
             e.printStackTrace();
         }
     }
+
+    // TODO: This time, instead of Docker Hub, send the docker images to Amazon ECR Service
 }
