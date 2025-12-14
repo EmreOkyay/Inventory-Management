@@ -64,4 +64,6 @@ public class OrderEventListener {
             e.printStackTrace();
         }
     }
+
+    // TODO: Simulate order progressing by updating order status as time passes and update the user simultaneously
 }

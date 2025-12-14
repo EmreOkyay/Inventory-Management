@@ -50,4 +50,6 @@ public class EmailServiceImpl implements EmailService {
             throw new IllegalStateException("failed to send email");
         }
     }
+
+    // TODO: Add reminder emails
 }

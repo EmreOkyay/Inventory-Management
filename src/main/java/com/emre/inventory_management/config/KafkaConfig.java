@@ -48,4 +48,6 @@ public class KafkaConfig {
         factory.setConsumerFactory(consumerFactory());
         return factory;
     }
+
+    // TODO: Improve Kafka system with clusters and KRaft
 }
