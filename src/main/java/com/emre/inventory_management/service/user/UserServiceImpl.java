@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService{
         User savedUser = userRepository.save(user);
         producer.sendUserMailEvent(user);
 
-        return returnUserDTO(savedUser);
+        return userMapper.toDTO(savedUser);
     }
 
     public List<UserDTO> getAllUsers() {
@@ -58,15 +58,5 @@ public class UserServiceImpl implements UserService{
 
     public void deleteById(Long id) {
         userRepository.deleteById(id);
-    }
-
-    public UserDTO returnUserDTO(User savedUser) {
-        UserDTO userDto = new UserDTO();
-        userDto.setId(savedUser.getId());
-        userDto.setFirstName(savedUser.getFirstName());
-        userDto.setLastName(savedUser.getLastName());
-        userDto.setEmail(savedUser.getEmail());
-
-        return userDto;
     }
 }
