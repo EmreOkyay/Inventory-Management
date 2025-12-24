@@ -46,6 +46,7 @@ public class UserServiceImpl implements UserService{
         return userRepository.findAll().stream().map(userMapper::toDTO).toList();
     }
 
+    // TODO: Implement a different method instead of Optional
     @Override
     public Optional<UserDTO> getUserById(Long id) {
         return userRepository.findById(id).map(userMapper::toDTO);
